@@ -1,0 +1,56 @@
+
+.root {
+    /*-fx-font-size: 16pt;*/
+    /*-fx-font-family: "Courier New";*/
+    /*-fx-background: rgb(225, 228, 203);*/
+}
+
+.butMove {
+    -fx-background-color: transparent;
+}
+
+.butMove .label {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    /*-fx-background-color:black;*/
+}
+
+.butEntite {
+    -fx-background-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-color: white;
+    -fx-border-radius: 10;
+}
+
+.butEntite .label {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
+    -fx-background-color:#333;
+    -fx-background-radius: 10;
+    -fx-font-family: Nyala;
+    -fx-font-size: 30;
+    -fx-padding:10;
+}
+
+.butEntite:hover {
+    -fx-background-color: #333;
+    -fx-cursor: hand;
+}
+
+.descBox {
+
+}
+
+.hbEntiteScroll {
+    -fx-background: transparent;
+    -fx-background-color:transparent;
+    -fx-border-width: 0;
+}
+
+.hbEntite {
+    /*-fx-background-color:white;*/
+}
+
+.masque {
+    -fx-background-color: rgba(0,0,0,0.5);
+}

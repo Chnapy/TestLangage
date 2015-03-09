@@ -1,0 +1,170 @@
+//Déclarations des ressources (aucune obligation de toutes les déclarer)
+//Seul informations {} et fenetre {} sont obligatoires
+//Une ressource peut être déclarée pendant le déroulement de la fiction
+
+
+ressources {
+
+	// Les informations générales de la fiction (OBLIGATOIRE)
+	informations {
+		nom: NomDeLaFiction
+		type: Aventure
+		auteur: Jean-Michel
+	}
+	
+	// Les propriétés de la fenetre (OBLIGATOIRE)
+	fenetre {
+		titre: Titre de la fenetre	//Si non spécifié, prend le nom de la fiction + l'auteur
+		largeur: 1200
+		longueur: 800
+	}
+	
+	// Les salles
+	lieux {
+		Hall {
+			devant: Chambre
+			entrée {	//Actions au moment d'entrer dans la room
+				avant [	//Avant d'entrer, lance les actions...
+					action1
+					action2
+				]
+			}
+			sortie {	//Actions au moment de sortir de la room
+				après [	//après sortir, lance les actions...
+					action1
+					action2
+				]
+			}
+		}
+		Chambre {
+			derriere: Hall		//Sous la Chambre se trouve le Hall
+		}
+		TestLieu1 {
+			derriere: Chambre
+		}
+
+	}
+	
+	// Les personnages
+	personnages {
+		Bob {
+			age: 31
+			sexe: m
+			personnalité: aggressif
+			lieu: Hall
+			joueur: oui		//Représente le joueur
+			attributs [
+				endormi | reveillé	//Peut posséder l'un OU l'autre
+				vivant | mort
+			]
+		}
+
+		Eva {
+			age: 42
+			sexe: f
+			personnalité [
+				aggressive
+				folle
+			]
+			inventaire: 12	//Possède un inventaire avec 12 emplacement
+			lieu: Hall
+		}
+		Toto {
+			lieu: Hall
+		}
+	}
+	
+	// Les objets
+	choses {
+		frigo {
+			poids: lourd
+			ouvrable: oui
+			verrouillable: oui
+			conteneur: 15
+			transportable: non
+			attributs [
+				plein | vide	//Peut posséder l'un OU l'autre
+			]
+			lieu: Hall
+		}
+
+		test1 {
+			test : test1
+			testt : test3
+			testtt : test2
+			lieu: Hall
+		}
+
+		test2 {
+			test : test1
+			testt : test3
+			testtt : test2
+			lieu: Hall
+		}
+	}
+	
+	// Les actions personnalisées
+	actions {
+		xPrendre [	//L'action xPrendre examine puis prend
+			examiner
+			prendre
+		]
+	}
+	
+	// Les variables, de tout type
+	variables {
+		Entier {		// Les nombres entiers
+			varTest1: 14
+		}
+		Reel {		// Les nombres réels
+			varTest2: 15,78
+		}
+		Texte {		// Les textes
+			varTest3: toto
+		}
+		Lieux {		// Les rooms
+			varTest4: Hall
+		}
+	}
+	
+	// Les fonctions
+	fonctions {
+		fonction1 [	// Cette fonction lance ces actions
+			action1
+			action2
+		]
+	
+	}
+
+}
+
+#Introduction
+
+Bob est dans le Hall.
+Eva est dans le Hall.
+
+Le jeu commence maintenant.	//Début de la fiction, maintenant peut être remplacé par un nombre de secondes: Le jeu commence dans 5 secondes.
+
+Un dialogue nommé Dialogue1 commence avec Bob,Eva {
+	Bob: Coucou !
+	Eva: Hello !
+	Bob: Comment ca va ?
+	Eva: Bien et toi?
+	Bob: Choix1 [			// Permet un choix au joueur, le choix est ici nommé Choix1.
+		Bien: action1		// Si le joueur choisi Bien, l'action action1 sera lancée
+		Mal [				// Si le joueur choisi Mal, l'action action1 et l'action2 seront lancées
+			action1
+			action2
+		]
+	]
+}
+
+// Choix1 est en fait une variable dans laquelle est stockée le choix de l'utilisateur
+
+#Declencheurs
+
+//TODO
+
+#Conséquences
+
+//TODO
