@@ -20,13 +20,13 @@ public class ControleurCompile {
     private ModeleCompile modele;
     private VueCompile vue;
     private TabRessources tabRess;
-    private Console console;
+    public static Console console;
     private BoucleJeu bouclejeu;
 
-    public ControleurCompile(ModeleCompile model) {
-	modele = model;
-	tabRess = new TabRessources(modele.getPcode().getRessources());
+    public ControleurCompile(String code) {
 	console = new Console();
+	modele = new ModeleCompile(code);
+	tabRess = new TabRessources(modele.getPcode().getRessources());
 	vue = new VueCompile(modele);
 	vue.setOnCloseRequest((event) -> {
 	    tabRess.close();
@@ -38,5 +38,5 @@ public class ControleurCompile {
 	bouclejeu.start(modele.getDebut());
 
     }
-
+    
 }

@@ -5,7 +5,6 @@
  */
 package modele.compile;
 
-import controleur.General;
 import java.util.ArrayList;
 import java.util.HashMap;
 

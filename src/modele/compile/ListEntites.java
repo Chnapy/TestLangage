@@ -5,6 +5,7 @@
  */
 package modele.compile;
 
+import static controleur.ControleurCompile.console;
 import modele.precompile.ListDonnees;
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ListEntites extends ArrayList<Entite> {
 	    pdonnee = (ListDonnees) listPersos.get(nomDonnee);
 	    this.add(new Personnage(nomDonnee, pdonnee));
 	}
+	console.println("Liste d'entités définie.");
     }
 
     @Override
@@ -43,6 +45,7 @@ public class ListEntites extends ArrayList<Entite> {
 		en.setLieu(univers.get(textLieu));
 	    }
 	}
+	console.println("Lieux des entités définis.");
     }
 
     public ArrayList<Entite> getEntites(Lieu lieu) {

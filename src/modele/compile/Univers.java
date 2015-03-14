@@ -5,6 +5,7 @@
  */
 package modele.compile;
 
+import static controleur.ControleurCompile.console;
 import modele.precompile.ListDonnees;
 import java.util.HashMap;
 
@@ -54,6 +55,7 @@ public class Univers extends HashMap<String, Lieu> {
 		}
 	    }
 	}
+	console.println("Univers défini !");
 
     }
 

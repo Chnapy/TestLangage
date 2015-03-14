@@ -5,6 +5,7 @@
  */
 package modele;
 
+import static controleur.ControleurCompile.console;
 import modele.precompile.ListDonnees;
 import modele.compile.ListEntites;
 import modele.precompile.PCode;
@@ -26,9 +27,11 @@ public class ModeleCompile {
     private ListDonnees[] tabRessources;
 
     public ModeleCompile(String oldCode) {
+	console.println("Compilation du code ...");
 	tabRessources = new ListDonnees[8];
 	pcode = new PCode(oldCode);
 	compiler();
+	console.println("Code compilé !");
 	debut = new MScene(univers.get("Hall"), listEntites.getEntites(univers.get("Hall")));
     }
 

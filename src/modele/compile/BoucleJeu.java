@@ -5,6 +5,7 @@
  */
 package modele.compile;
 
+import static controleur.ControleurCompile.console;
 import controleur.General;
 import static java.lang.Thread.sleep;
 import java.util.Observable;
@@ -37,6 +38,7 @@ public class BoucleJeu extends Observable implements Runnable {
     public void start(MScene debut) {
 	scene = debut;
 	th.start();
+	console.println("Boucle de jeu lancée !");
     }
 
     @Override
@@ -48,6 +50,7 @@ public class BoucleJeu extends Observable implements Runnable {
 	    Platform.runLater(() -> {
 		setChanged();
 		notifyObservers(scene);
+		console.println("Nouvelle scene lancée.");
 	    });
 	    scene.start();
 
@@ -74,6 +77,7 @@ public class BoucleJeu extends Observable implements Runnable {
     public void stop() {
 	run = false;
 	update = true;
+	console.println("Boucle de jeu terminée.");
     }
 
     public MScene getNewScene(String lieu) {

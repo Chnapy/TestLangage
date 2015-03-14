@@ -5,7 +5,6 @@
  */
 package modele.compile;
 
-import controleur.General;
 import modele.precompile.ListDonnees;
 import modele.precompile.Donnee;
 

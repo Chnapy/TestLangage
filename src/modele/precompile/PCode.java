@@ -5,10 +5,7 @@
  */
 package modele.precompile;
 
-import modele.precompile.TabAttribut;
-import modele.precompile.ListDonnees;
-import modele.precompile.Ligne;
-import modele.precompile.Attribut;
+import static controleur.ControleurCompile.console;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -17,8 +14,6 @@ import java.util.LinkedList;
  *
  */
 public class PCode extends ArrayList<Ligne> {
-
-    private static final long serialVersionUID = 1L;
 
     private ListDonnees ressources;
 
@@ -44,6 +39,7 @@ public class PCode extends ArrayList<Ligne> {
 		this.add(new Ligne(textLigne.split("\\s")));
 	    }
 	}
+	console.println("Code précompilé.");
     }
 
     @Override
@@ -116,6 +112,7 @@ public class PCode extends ArrayList<Ligne> {
 		}
 
 		if (listAjouts.isEmpty()) {
+		    console.println("Ressources définies.");
 //		    System.out.print(" break");
 		    return ress;
 		}
@@ -131,6 +128,7 @@ public class PCode extends ArrayList<Ligne> {
 
 //	    General.pln();
 	}
+	console.perror("Création des ressources : accolade fermante manquante pour Ressources {");
 	return null;
     }
 

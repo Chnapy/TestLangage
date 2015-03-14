@@ -78,7 +78,7 @@ public class ControleurMain {
 
     public void lancer(String code) {
 	if (!code.isEmpty()) {
-	    ControleurCompile controleurCompile = new ControleurCompile(new ModeleCompile(code));
+	    ControleurCompile controleurCompile = new ControleurCompile(code);
 	}
     }
 
