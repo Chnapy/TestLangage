@@ -34,35 +34,46 @@ public class ButMove extends Button {
 	    case 0:
 		box = new VBox(node, text);
 		text.setAlignment(Pos.CENTER);
+		this.setNodeSize(100, false);
 		break;
 	    case 1:
 		box = new VBox(text, node);
 		text.setAlignment(Pos.CENTER);
+		this.setNodeSize(100, false);
 		break;
 	    case 2:
 		box = new HBox(node, text);
 		text.setAlignment(Pos.CENTER_LEFT);
+		this.setNodeSize(100, true);
 		break;
 	    case 3:
 		box = new HBox(text, node);
 		text.setAlignment(Pos.CENTER_RIGHT);
+		this.setNodeSize(100, true);
 		break;
 	    default:
 		throw new Error();
 	}
 	text.setWrapText(false);
 	this.setGraphic(box);
-	this.setNodeSize(100);
+	this.setNodeSize(100, true);
 	this.setPadding(Insets.EMPTY);
     }
 
-    public void setNodeSize(double width) {
-	box.setMaxHeight(width);
-	box.setMaxWidth(width);
-	node.setFitWidth(width / 2);
-	node.setPreserveRatio(true);
-	text.setMinHeight(width / 2);
-	text.setMinWidth(width / 2);
+    private void setNodeSize(double width, boolean horizontal) {
+	if (horizontal) {
+	    box.setMaxWidth(width * General.RATIO_X);
+	    box.setMaxHeight(width * General.RATIO_Y / 2);
+	    node.setFitWidth(width * General.RATIO_X / 2);
+	    node.setPreserveRatio(true);
+	    text.setMinWidth(width * General.RATIO_X / 2);
+	} else {
+	    box.setMaxHeight(width * General.RATIO_Y);
+	    box.setMaxWidth(width * General.RATIO_X / 2);
+	    node.setFitHeight(width * General.RATIO_Y / 2);
+	    node.setPreserveRatio(true);
+	    text.setMinHeight(width * General.RATIO_Y / 2);
+	}
     }
 
     public void setLabText(String text) {

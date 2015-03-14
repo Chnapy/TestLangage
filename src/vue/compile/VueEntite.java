@@ -28,14 +28,14 @@ public class VueEntite extends Button {
 	vb = new VBox(img, nom);
 	setGraphic(vb);
 
-	setMinSize(200 * General.RATIO_X, 265 * General.RATIO_Y);
-	img.setFitWidth(200 * General.RATIO_X - 20);
+	setMinSize(100 * General.RATIO_X, 130 * General.RATIO_Y);
+	img.setFitWidth(100 * General.RATIO_X - 10);
 	img.setPreserveRatio(true);
 	nom.setWrapText(false);
-	nom.setMinWidth(200 * General.RATIO_X - 20);
+	nom.setMinWidth(100 * General.RATIO_X - 10);
 	nom.setAlignment(Pos.CENTER);
 
-	vb.setSpacing(20);
+	vb.setSpacing(10 * General.RATIO_Y);
 	getStyleClass().add("butEntite");
     }
 

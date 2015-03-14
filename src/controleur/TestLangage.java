@@ -1,5 +1,6 @@
+package controleur;
 
-import controleur.ControleurMain;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 

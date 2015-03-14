@@ -14,11 +14,11 @@ import vue.compile.VueCompile;
  * HbEntite.java
  *
  */
-public class HbEntite extends HBox {
+public class HbEntite extends HBox {	//TODO: Préférer FlowPane
 
     public HbEntite() {
-	setMinWidth(VueCompile.MAX_WIDTH - 200 * General.RATIO_X);
-	setHeight(265 * General.RATIO_Y);
+	setMinWidth(VueCompile.MAX_WIDTH - 200 * General.RATIO_X - 16);
+	setHeight(130 * General.RATIO_Y);
 	setAlignment(Pos.CENTER);
 	getStyleClass().add("hbEntite");
     }

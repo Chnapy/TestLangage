@@ -8,8 +8,10 @@ package vue.compile;
 import controleur.General;
 import java.util.Observable;
 import java.util.Observer;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
@@ -45,6 +47,7 @@ public class VueCompile extends Stage implements Observer {
     private HbEntite hb;
 
     private ButMove[] directions;
+    private Label lLieu;
     private DescriptionBox descbox;
 
     public VueCompile(ModeleCompile model) {
@@ -86,19 +89,28 @@ public class VueCompile extends Stage implements Observer {
 	directions[1] = new ButMove(1, IMGDOWN);
 	directions[2] = new ButMove(2, IMGLEFT);
 	directions[3] = new ButMove(3, IMGRIGHT);
-	setLayout(getButDevant(), (MAX_WIDTH - 100) / 2, 0);
-	setLayout(getButDerriere(), (MAX_WIDTH - 100) / 2, MAX_HEIGHT - 100);
-	setLayout(getButGauche(), 0, (MAX_HEIGHT - 100) / 2);
-	setLayout(getButDroite(), MAX_WIDTH - 100, (MAX_HEIGHT - 100) / 2);
+	setLayout(getButDevant(), (MAX_WIDTH / General.RATIO_X - 50) / 2, 0);
+	setLayout(getButDerriere(), (MAX_WIDTH / General.RATIO_X - 50) / 2, MAX_HEIGHT / General.RATIO_Y - 100);
+	setLayout(getButGauche(), 0, (MAX_HEIGHT / General.RATIO_Y - 100) / 2);
+	setLayout(getButDroite(), MAX_WIDTH / General.RATIO_X - 100, (MAX_HEIGHT / General.RATIO_Y - 50) / 2);
 	groupe.getChildren().addAll(directions);
 
+	lLieu = new Label();
+	lLieu.getStyleClass().add("labLieu");
+	lLieu.setLayoutX(100 * General.RATIO_X);
+	lLieu.setLayoutY(200 * General.RATIO_Y);
+	lLieu.setMinWidth(MAX_WIDTH - 200 * General.RATIO_X - 16);
+	lLieu.setMaxWidth(MAX_WIDTH - 200 * General.RATIO_X - 16);
+	lLieu.setAlignment(Pos.CENTER);
+	groupe.getChildren().add(lLieu);
+
 	hb = new HbEntite();
-	hb.setSpacing(20);
+	hb.setSpacing(20 * General.RATIO_X);
 	sp = new ScrollPane(hb);
 	sp.setLayoutX(100 * General.RATIO_X);
-	sp.setLayoutY((MAX_HEIGHT - 265) / 2);
-	sp.setPrefViewportWidth(MAX_WIDTH - 200 * General.RATIO_X);
-	sp.setPrefViewportHeight(265 * General.RATIO_Y);
+	sp.setLayoutY((MAX_HEIGHT - 130 * General.RATIO_Y) / 2);
+	sp.setPrefViewportWidth(MAX_WIDTH - 200 * General.RATIO_X - 16);
+	sp.setPrefViewportHeight(130 * General.RATIO_Y + 38);
 	sp.getStyleClass().add("hbEntiteScroll");
 	groupe.getChildren().add(sp);
 
@@ -143,6 +155,9 @@ public class VueCompile extends Stage implements Observer {
     public void update(Observable o, Object arg) {
 	BoucleJeu bj = (BoucleJeu) o;
 	MScene mscene = (MScene) arg;
+
+	lLieu.setText(mscene.getLieu().getNom());
+
 	try {
 	    getButDevant().setLabText(mscene.getLieu().getlDevant().getNom());
 	    getButDevant().setOnAction((event) -> {
