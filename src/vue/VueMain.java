@@ -14,19 +14,19 @@ import controleur.ControleurMain;
 import controleur.General;
 import java.io.File;
 import java.nio.file.Path;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.OverrunStyle;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import org.fxmisc.richtext.CodeArea;
 import static vue.accordeon.TextFieldTreeCellImpl.debutPath;
 
 /**
@@ -47,7 +47,7 @@ public class VueMain {
     private final Scene scene;
 
     private TabPane listOnglets;
-    private TextArea textZone;
+    private CodeArea textZone;
     private HBox hList;
     private Accordion accor;
     private Arborescence arbo;
@@ -88,14 +88,15 @@ public class VueMain {
 	initButton();
 	initButton2();
 
-	textZone = new TextArea();
+	textZone = new CodeArea();
 	textZone.setLayoutY(MARGEHAUTE);
 	textZone.setMinSize(General.WINDOW_WIDTH - ACCORWIDTH, General.WINDOW_HEIGHT - MARGEHAUTE);
 	textZone.setMaxSize(General.WINDOW_WIDTH - ACCORWIDTH, General.WINDOW_HEIGHT - MARGEHAUTE);
 	groupe.getChildren().add(textZone);
 	textZone.setDisable(true);
-	textZone.setOnKeyPressed((KeyEvent event) -> {
-	    if (!fichActu.getContenu().equals(textZone.getText())) {
+	textZone.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+	    // Va être lancé à chaque changement dans le texte
+	    if (!oldValue.isEmpty()) {
 		fichActu.setContenu(textZone.getText());
 		fichActu.modif(true);
 		if (enregistrer.isDisabled()) {
@@ -217,19 +218,21 @@ public class VueMain {
 	listOnglets.getSelectionModel().select(fichier);
 	fichier.setOnSelectionChanged((event) -> {
 	    fichActu = fichier;
-	    textZone.setText(fichier.getContenu());
+	    textZone.clear();
+	    textZone.appendText(fichier.getContenu());
 	    enregistrer.setDisable(!fichActu.isModif());
 	});
 	fichier.setOnClosed((event) -> {
 	    if (listOnglets.getTabs().isEmpty()) {
-		textZone.setText("");
+		textZone.clear();
 		textZone.setDisable(true);
 		enrTout.setDisable(true);
 		enregistrer.setDisable(true);
 	    }
 	});
 	fichActu = fichier;
-	textZone.setText(fichier.getContenu());
+	textZone.clear();
+	textZone.appendText(fichier.getContenu());
 	textZone.setDisable(false);
     }
 
@@ -237,7 +240,7 @@ public class VueMain {
 	if (fichActu != null && path.equals(fichActu.getFichier().toPath())) {
 	    listOnglets.getTabs().remove(fichActu);
 	    if (listOnglets.getTabs().isEmpty()) {
-		textZone.setText("");
+		textZone.clear();
 		textZone.setDisable(true);
 		enrTout.setDisable(true);
 		enregistrer.setDisable(true);
