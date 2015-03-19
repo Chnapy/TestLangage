@@ -14,6 +14,7 @@ import controleur.ControleurMain;
 import controleur.General;
 import java.io.File;
 import java.nio.file.Path;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
@@ -24,7 +25,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import static vue.accordeon.TextFieldTreeCellImpl.debutPath;
@@ -94,8 +94,9 @@ public class VueMain {
 	textZone.setMaxSize(General.WINDOW_WIDTH - ACCORWIDTH, General.WINDOW_HEIGHT - MARGEHAUTE);
 	groupe.getChildren().add(textZone);
 	textZone.setDisable(true);
-	textZone.setOnKeyPressed((KeyEvent event) -> {
-	    if (!fichActu.getContenu().equals(textZone.getText())) {
+	textZone.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+	    // Va être lancé à chaque changement dans le texte
+	    if (!oldValue.isEmpty()) {
 		fichActu.setContenu(textZone.getText());
 		fichActu.modif(true);
 		if (enregistrer.isDisabled()) {
@@ -103,6 +104,7 @@ public class VueMain {
 		    enrTout.setDisable(false);
 		}
 	    }
+	    //toto
 	});
 
 	accor = new Accordion();

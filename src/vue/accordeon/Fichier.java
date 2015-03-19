@@ -50,12 +50,11 @@ public class Fichier extends Tab {
     }
 
     public void modif(boolean modif) {
+	this.modif = modif;
 	this.setClosable(!modif);
 	if (modif) {
-	    this.modif = true;
 	    this.setStyle("-fx-font-weight: bold;");
 	} else {
-	    this.modif = false;
 	    this.setStyle("-fx-font-weight: normal;");
 	}
     }
