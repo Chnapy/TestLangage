@@ -1,6 +1,10 @@
 # TestLangage
-Un langage et son IDE afin de créer des fictions intéractives
+Un langage et son IDE afin de créer des fictions intéractives.
 
+# Dépendances
+Il est nécessaire de posséder le [JDK 1.8](https://www.java.com/fr/download/). Il est conseillé de posséder la version 1.8u40 ou supérieur.
+
+# RichTextFX
 L'ide utilise l'objet [RichTextFX](https://github.com/TomasMikula/RichTextFX).
 Cet objet permet l'utilisation de la coloration syntaxique (contrairement à l'objet TextArea).
 
