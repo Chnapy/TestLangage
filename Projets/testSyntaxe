@@ -9,7 +9,7 @@ ressources {
 	informations {
 		nom: NomDeLaFiction
 		type: Aventure
-		auteur: Jean-Michel
+		auteur: Toto
 	}
 	
 	// Les propriétés de la fenetre (OBLIGATOIRE)
@@ -37,10 +37,10 @@ ressources {
 			}
 		}
 		Chambre {
-			derriere: Hall		//Sous la Chambre se trouve le Hall
+			derriere: Hall		//Derriere la Chambre se trouve le Hall
 		}
 		TestLieu1 {
-			derriere: Chambre
+			gauche: Chambre
 		}
 
 	}
@@ -54,7 +54,7 @@ ressources {
 			lieu: Hall
 			joueur: oui		//Représente le joueur
 			attributs [
-				endormi | reveillé	//Peut posséder l'un OU l'autre
+				endormi | reveillé	//Peut posséder l'un OU l'autre (par défaut le premier)
 				vivant | mort
 			]
 		}
@@ -67,7 +67,7 @@ ressources {
 				folle
 			]
 			inventaire: 12	//Possède un inventaire avec 12 emplacement
-			lieu: Hall
+			lieu: Chambre
 		}
 		Toto {
 			lieu: Hall
@@ -85,7 +85,7 @@ ressources {
 			attributs [
 				plein | vide	//Peut posséder l'un OU l'autre
 			]
-			lieu: Hall
+			lieu: TestLieu1
 		}
 
 		test1 {
@@ -99,7 +99,7 @@ ressources {
 			test : test1
 			testt : test3
 			testtt : test2
-			lieu: Hall
+			lieu: Chambre
 		}
 	}
 	

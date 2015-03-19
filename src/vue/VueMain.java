@@ -8,8 +8,6 @@ package vue;
 import vue.accordeon.Fichier;
 import vue.accordeon.Arborescence;
 import vue.accordeon.Documentation;
-import com.sun.javafx.scene.control.behavior.TextInputControlBehavior;
-import com.sun.javafx.scene.control.skin.TextInputControlSkin;
 import controleur.ControleurMain;
 import controleur.General;
 import java.io.File;
@@ -67,7 +65,7 @@ public class VueMain {
 	controleur = control;
 
 	stage = st;
-	stage.setTitle("IDE de la mort");
+	stage.setTitle("NOM_IDE");
 	stage.setWidth(General.WINDOW_WIDTH + 16);
 	stage.setHeight(General.WINDOW_HEIGHT + 38);
 
@@ -104,7 +102,6 @@ public class VueMain {
 		    enrTout.setDisable(false);
 		}
 	    }
-	    //toto
 	});
 
 	accor = new Accordion();
@@ -191,10 +188,10 @@ public class VueMain {
 	    controleur.lancer(textZone.getText());
 	});
 	annulerAction.setOnAction((event) -> {
-	    ((TextInputControlBehavior) ((TextInputControlSkin) textZone.getSkin()).getBehavior()).callAction("Undo");
+	    textZone.undo();
 	});
 	refaireAction.setOnAction((event) -> {
-	    ((TextInputControlBehavior) ((TextInputControlSkin) textZone.getSkin()).getBehavior()).callAction("Redo");
+	    textZone.redo();
 	});
     }
 
