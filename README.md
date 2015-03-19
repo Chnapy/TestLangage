@@ -1,8 +1,9 @@
 # TestLangage
 Un langage et son IDE afin de créer des fictions intéractives.
+Il utilise JavaFX pour l'interface graphique.
 
 # Dépendances
-Il est nécessaire de posséder le [JDK 1.8](https://www.java.com/fr/download/). Il est conseillé de posséder la version 1.8u40 ou supérieur.
+Il est nécessaire de posséder le [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html#javasejdk). Il est conseillé de posséder la version 1.8u40 ou supérieur.
 
 # RichTextFX
 L'ide utilise l'objet [RichTextFX](https://github.com/TomasMikula/RichTextFX).
