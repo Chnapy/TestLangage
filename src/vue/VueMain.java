@@ -104,6 +104,7 @@ public class VueMain {
 		    enrTout.setDisable(false);
 		}
 	    }
+	    //toto
 	});
 
 	accor = new Accordion();
