@@ -1,0 +1,8 @@
+.keyword{
+    -fx-fill: red;
+    -fx-font-weight: 800;
+}
+.paren{
+    -fx-fill: green;
+    -fx-font-weight: 800;
+}

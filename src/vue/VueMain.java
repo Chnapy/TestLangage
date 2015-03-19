@@ -26,6 +26,7 @@ import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import language.syntax.ColorationSyntaxe;
 import org.fxmisc.richtext.CodeArea;
 import static vue.accordeon.TextFieldTreeCellImpl.debutPath;
 
@@ -73,6 +74,7 @@ public class VueMain {
 
 	groupe = new Group();
 	scene = new Scene(groupe);
+        scene.getStylesheets().add("style/keyword.css");
 	stage.setScene(scene);
 
 	hList = new HBox();
@@ -97,6 +99,7 @@ public class VueMain {
 	textZone.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
 	    // Va être lancé à chaque changement dans le texte
 	    if (!oldValue.isEmpty()) {
+                ColorationSyntaxe.color(textZone,newValue);
 		fichActu.setContenu(textZone.getText());
 		fichActu.modif(true);
 		if (enregistrer.isDisabled()) {
@@ -105,7 +108,7 @@ public class VueMain {
 		}
 	    }
 	});
-
+        
 	accor = new Accordion();
 	accor.setMinHeight(General.WINDOW_HEIGHT - 19);
 	accor.setMinWidth(ACCORWIDTH);
