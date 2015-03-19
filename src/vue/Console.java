@@ -11,8 +11,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import org.fxmisc.richtext.CodeArea;
 
 /**
  * Console.java
@@ -20,13 +20,13 @@ import javafx.stage.Stage;
  */
 public class Console extends Stage {
     
-    private TextArea textZone;
+    private CodeArea textZone;
     private final DateFormat df = new SimpleDateFormat("HH:mm:ss");
     
     public Console() {
 	super();
 	
-	textZone = new TextArea();
+	textZone = new CodeArea();
 	textZone.setEditable(false);
 	
 	this.setTitle("Débuguage");
@@ -38,11 +38,11 @@ public class Console extends Stage {
     }
     
     public void println(String text) {
-	textZone.setText(textZone.getText() + df.format(new Date()) + ' ' + text + '\n');
+	textZone.appendText(df.format(new Date()) + ' ' + text + '\n');
     }
 
     public void perror(String text) {
-	textZone.setText(textZone.getText() + "[ERREUR] " + df.format(new Date()) + ' ' + text + '\n');
+	textZone.appendText("[ERREUR] " + df.format(new Date()) + ' ' + text + '\n');
     }
     
 }
