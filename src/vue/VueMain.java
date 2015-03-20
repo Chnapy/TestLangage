@@ -8,8 +8,6 @@ package vue;
 import vue.accordeon.Fichier;
 import vue.accordeon.Arborescence;
 import vue.accordeon.Documentation;
-import com.sun.javafx.scene.control.behavior.TextInputControlBehavior;
-import com.sun.javafx.scene.control.skin.TextInputControlSkin;
 import controleur.ControleurMain;
 import controleur.General;
 import java.io.File;
