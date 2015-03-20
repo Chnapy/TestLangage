@@ -11,6 +11,12 @@ package language.syntax;
  * @author Yann
  */
 public class KeyWord {
-    public final static String[] initialisateurs = {"ressources","informations"};
-
+    public final static String[] initialisateurs = {"ressources","informations","lieux","personnage","choses",
+        "actions","variables","fonctions"};
+    public static String[] rooms = {};
+    public static String[] perso = {};
+    public static String[] choses = {};
+    public static String[] actions = {};
+    public static String[] variables = {};
+    public static String[] fonctions = {};
 }

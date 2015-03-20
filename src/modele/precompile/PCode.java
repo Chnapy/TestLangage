@@ -39,7 +39,7 @@ public class PCode extends ArrayList<Ligne> {
 		this.add(new Ligne(textLigne.split("\\s")));
 	    }
 	}
-	console.println("Code précompilé.");
+	//console.println("Code précompilé.");
     }
 
     @Override
@@ -112,7 +112,7 @@ public class PCode extends ArrayList<Ligne> {
 		}
 
 		if (listAjouts.isEmpty()) {
-		    console.println("Ressources définies.");
+		   // System.out.println("Ressources définies.");
 //		    System.out.print(" break");
 		    return ress;
 		}

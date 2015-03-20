@@ -23,7 +23,7 @@ import org.fxmisc.richtext.StyleSpansBuilder;
  */
 public class ColorationSyntaxe {
     
-    private static String KEYWORD_PATTERN = "\\b(" + String.join("|", KeyWord.initialisateurs) + ")\\b";
+    private final static String KEYWORD_PATTERN = "\\b(" + String.join("|", KeyWord.initialisateurs) + ")\\b";
     private static String ROOM_PATTERN = "\\b(" + String.join("|", KeyWord.rooms ) + ")\\b";
     private static String PERSO_PATTERN = "\\b(" + String.join("|", KeyWord.perso ) + ")\\b";
     private static String CHOSES_PATTERN = "\\b(" + String.join("|", KeyWord.choses ) + ")\\b";

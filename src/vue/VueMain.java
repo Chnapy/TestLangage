@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import language.syntax.ColorationSyntaxe;
 import org.fxmisc.richtext.CodeArea;
@@ -94,6 +95,8 @@ public class VueMain {
 	textZone.setMaxSize(General.WINDOW_WIDTH - ACCORWIDTH, General.WINDOW_HEIGHT - MARGEHAUTE);
 	groupe.getChildren().add(textZone);
 	textZone.setDisable(true);
+        textZone.setStyle("-fx-font-family: Consolas;"
+                + "-fx-font-size: 15px");
 	textZone.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
 	    // Va être lancé à chaque changement dans le texte
 	    if (!oldValue.isEmpty()) {
@@ -221,6 +224,7 @@ public class VueMain {
 	    fichActu = fichier;
 	    textZone.clear();
 	    textZone.appendText(fichier.getContenu());
+            ColorationSyntaxe.color(textZone,textZone.getText());
 	    enregistrer.setDisable(!fichActu.isModif());
 	});
 	fichier.setOnClosed((event) -> {
@@ -234,6 +238,7 @@ public class VueMain {
 	fichActu = fichier;
 	textZone.clear();
 	textZone.appendText(fichier.getContenu());
+        ColorationSyntaxe.color(textZone,textZone.getText());
 	textZone.setDisable(false);
     }
 

@@ -1,8 +1,29 @@
 .keyword{
-    -fx-fill: red;
+    -fx-fill: #810000;
     -fx-font-weight: 800;
 }
-.paren{
-    -fx-fill: green;
+
+.room{
+    -fx-fill: #326905;
+    -fx-font-weight: 800;
+}
+.perso{
+    -fx-fill: #CA8D00;
+    -fx-font-weight: 800;
+}
+.choses{
+    -fx-fill: #C6AF06;
+    -fx-font-weight: 800;
+}
+.actions{
+    -fx-fill: #003679;
+    -fx-font-weight: 800;
+}
+.variables{
+    -fx-fill: #59004F;
+    -fx-font-style:italic;
+}
+.fonctions{
+    -fx-fill: #0A6347;
     -fx-font-weight: 800;
 }
