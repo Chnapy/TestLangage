@@ -1,33 +1,37 @@
 .keyword{
     -fx-fill: #810000;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 
 .room{
     -fx-fill: #326905;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 .perso{
     -fx-fill: #CA8D00;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 .choses{
     -fx-fill: #C6AF06;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 .actions{
     -fx-fill: #003679;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 .variables{
     -fx-fill: #59004F;
-    -fx-font-style:italic;
+    -fx-font-weight: bold;
 }
 .fonctions{
     -fx-fill: #0A6347;
-    -fx-font-weight: 800;
+    -fx-font-weight: bold;
 }
 
-.usefonction {
-    -fx-fill: #002580;
+.diese {
+    -fx-fill: #003679;
+}
+
+.dollar {
+    -fx-fill: #59004F;
 }

@@ -105,8 +105,9 @@ ressources {
 	// Les actions personnalisées
 	actions {
 		xPrendre [	//L'action xPrendre examine puis prend
-			examiner
-			prendre
+			#examiner
+			Affichage de texte
+			#prendre
 		]
 	}
 	
@@ -151,13 +152,14 @@ Un dialogue nommé Dialogue1 commence avec Bob,Eva {
 	Bob: Comment ca va ?
 	Eva: Bien et toi?
 	Bob: Choix1 [			// Permet un choix au joueur, le choix est ici nommé Choix1.
-		Bien: #action1		// Si le joueur choisi Bien, l'action action1 sera lancée
+		Bien: #xPrendre		// Si le joueur choisi Bien, l'action action1 sera lancée
 		Mal [				// Si le joueur choisi Mal, l'action action1 et l'action2 seront lancées
 			#action1
 			#action2
+			#xPrendre
 		]
 	]
-	Eva: Exemple $varTest3
+	Eva: Exemple $varTest3	//Variable
 }
 
 // Choix1 est en fait une variable dans laquelle est stockée le choix de l'utilisateur

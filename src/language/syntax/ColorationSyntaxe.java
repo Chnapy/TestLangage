@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import modele.precompile.Donnee;
 import modele.precompile.ListDonnees;
 import modele.precompile.PCode;
 import org.fxmisc.richtext.CodeArea;
@@ -29,7 +30,8 @@ public class ColorationSyntaxe {
     private static String ACTION_PATTERN;
     private static String VARIABLES_PATTERN;
     private static String FONCTIONS_PATTERN;
-    private static String USEFONCTION_PATTERN;
+    private static String DIESE_PATTERN;
+    private static String DOLLAR_PATTERN;
 
     private static Pattern PATTERN;
 
@@ -37,19 +39,20 @@ public class ColorationSyntaxe {
 	ROOM_PATTERN = "\\b(" + String.join("|", KeyWord.lieux) + ")\\b";
 	PERSO_PATTERN = "\\b(" + String.join("|", KeyWord.perso) + ")\\b";
 	CHOSES_PATTERN = "\\b(" + String.join("|", KeyWord.choses) + ")\\b";
-	ACTION_PATTERN = "\\b(" + String.join("|", KeyWord.actions) + ")\\b";
-	VARIABLES_PATTERN = "\\b(" + String.join("|", KeyWord.variables) + ")\\b";
+	ACTION_PATTERN = "#(" + String.join("|", KeyWord.actions) + ")\\b";
+	VARIABLES_PATTERN = "\\$(" + String.join("|", KeyWord.variables) + ")\\b";
 	FONCTIONS_PATTERN = "\\b(" + String.join("|", KeyWord.fonctions) + ")\\b";
-	USEFONCTION_PATTERN = "#.*\\s";
-	PATTERN = Pattern.compile(
-		"(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+	DIESE_PATTERN = "#.*?\\s";
+	DOLLAR_PATTERN = "\\$.*?\\s";
+	PATTERN = Pattern.compile("(?<KEYWORD>" + KEYWORD_PATTERN + ")"
 		+ "|(?<ROOM>" + ROOM_PATTERN + ")"
 		+ "|(?<PERSO>" + PERSO_PATTERN + ")"
 		+ "|(?<CHOSES>" + CHOSES_PATTERN + ")"
 		+ "|(?<ACTION>" + ACTION_PATTERN + ")"
 		+ "|(?<VARIABLES>" + VARIABLES_PATTERN + ")"
 		+ "|(?<FONCTIONS>" + FONCTIONS_PATTERN + ")"
-		+ "|(?<USEFONCTION>" + USEFONCTION_PATTERN + ")"
+		+ "|(?<DIESE>" + DIESE_PATTERN + ")"
+		+ "|(?<DOLLAR>" + DOLLAR_PATTERN + ")"
 	);
     }
 
@@ -63,17 +66,36 @@ public class ColorationSyntaxe {
 	Matcher matcher = PATTERN.matcher(text);
 	int lastKwEnd = 0;
 	StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
+	String styleClass;
 	while (matcher.find()) {
-	    String styleClass
-		    = matcher.group("KEYWORD") != null ? "keyword"
-			    : matcher.group("ROOM") != null ? "room"
-				    : matcher.group("PERSO") != null ? "perso"
-					    : matcher.group("CHOSES") != null ? "choses"
-						    : matcher.group("ACTION") != null ? "actions"
-							    : matcher.group("VARIABLES") != null ? "variables"
-								    : matcher.group("FONCTIONS") != null ? "fonctions"
-									    : matcher.group("USEFONCTION") != null ? "usefonction"
-										    : null; /* never happens */ assert styleClass != null;
+	    styleClass = "";
+	    if (matcher.group("KEYWORD") != null) {
+		styleClass = "keyword";
+	    }
+	    if (matcher.group("ROOM") != null) {
+		styleClass = "room";
+	    }
+	    if (matcher.group("PERSO") != null) {
+		styleClass = "perso";
+	    }
+	    if (matcher.group("CHOSES") != null) {
+		styleClass = "choses";
+	    }
+	    if (matcher.group("ACTION") != null) {
+		styleClass = "actions";
+	    }
+	    if (matcher.group("VARIABLES") != null) {
+		styleClass = "variables";
+	    }
+	    if (matcher.group("FONCTIONS") != null) {
+		styleClass = "fonctions";
+	    }
+	    if (matcher.group("DIESE") != null) {
+		styleClass = "diese";
+	    }
+	    if (matcher.group("DOLLAR") != null) {
+		styleClass = "dollar";
+	    }
 	    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
 	    spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
 	    lastKwEnd = matcher.end();
@@ -94,36 +116,38 @@ public class ColorationSyntaxe {
 	//Personnages
 	liste = ((ListDonnees) donnees.get("personnages"));
 
-	liste.values().stream().forEach((lieu) -> {
-	    KeyWord.perso = append(KeyWord.perso, lieu.getNom());
+	liste.values().stream().forEach((perso) -> {
+	    KeyWord.perso = append(KeyWord.perso, perso.getNom());
 	});
 
 	//Choses
 	liste = ((ListDonnees) donnees.get("choses"));
 
-	liste.values().stream().forEach((lieu) -> {
-	    KeyWord.choses = append(KeyWord.choses, lieu.getNom());
+	liste.values().stream().forEach((chose) -> {
+	    KeyWord.choses = append(KeyWord.choses, chose.getNom());
 	});
 
 	//Actions
 	liste = ((ListDonnees) donnees.get("actions"));
 
-	liste.values().stream().forEach((lieu) -> {
-	    KeyWord.actions = append(KeyWord.actions, lieu.getNom());
+	liste.values().stream().forEach((action) -> {
+	    KeyWord.actions = append(KeyWord.actions, action.getNom());
 	});
 
 	//Variables
 	liste = ((ListDonnees) donnees.get("variables"));
 
-	liste.values().stream().forEach((lieu) -> {
-	    KeyWord.variables = append(KeyWord.variables, lieu.getNom());
+	liste.values().stream().forEach((Donnee variable) -> {
+	    for (Donnee var : ((ListDonnees) variable).values()) {
+		KeyWord.variables = append(KeyWord.variables, var.getNom());
+	    }
 	});
 
 	//Fonctions
 	liste = ((ListDonnees) donnees.get("fonctions"));
 
-	liste.values().stream().forEach((lieu) -> {
-	    KeyWord.fonctions = append(KeyWord.fonctions, lieu.getNom());
+	liste.values().stream().forEach((fonction) -> {
+	    KeyWord.fonctions = append(KeyWord.fonctions, fonction.getNom());
 	});
 
     }
