@@ -2,7 +2,6 @@
 //Seul informations {} et fenetre {} sont obligatoires
 //Une ressource peut être déclarée pendant le déroulement de la fiction
 
-
 ressources {
 
 	// Les informations générales de la fiction (OBLIGATOIRE)
@@ -130,15 +129,16 @@ ressources {
 	// Les fonctions
 	fonctions {
 		fonction1 [	// Cette fonction lance ces actions
-			action1
-			action2
+			#action1
+			Affichage de texte
+			#action2
 		]
 	
 	}
 	
 }
 
-#Introduction
+.Introduction
 
 Bob est dans le Hall.
 Eva est dans le Hall.
@@ -151,20 +151,21 @@ Un dialogue nommé Dialogue1 commence avec Bob,Eva {
 	Bob: Comment ca va ?
 	Eva: Bien et toi?
 	Bob: Choix1 [			// Permet un choix au joueur, le choix est ici nommé Choix1.
-		Bien: action1		// Si le joueur choisi Bien, l'action action1 sera lancée
+		Bien: #action1		// Si le joueur choisi Bien, l'action action1 sera lancée
 		Mal [				// Si le joueur choisi Mal, l'action action1 et l'action2 seront lancées
-			action1
-			action2
+			#action1
+			#action2
 		]
 	]
+	Eva: Exemple $varTest3
 }
 
 // Choix1 est en fait une variable dans laquelle est stockée le choix de l'utilisateur
 
-#Declencheurs
+.Declencheurs
 
 //TODO
 
-#Conséquences
+.Conséquences
 
 //TODO

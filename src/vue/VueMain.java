@@ -23,10 +23,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import language.syntax.ColorationSyntaxe;
 import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
 import static vue.accordeon.TextFieldTreeCellImpl.debutPath;
 
 /**
@@ -95,6 +95,7 @@ public class VueMain {
 	textZone.setMaxSize(General.WINDOW_WIDTH - ACCORWIDTH, General.WINDOW_HEIGHT - MARGEHAUTE);
 	groupe.getChildren().add(textZone);
 	textZone.setDisable(true);
+	textZone.setParagraphGraphicFactory(LineNumberFactory.get(textZone));
         textZone.setStyle("-fx-font-family: Consolas;"
                 + "-fx-font-size: 15px");
 	textZone.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {

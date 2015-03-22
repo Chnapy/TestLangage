@@ -20,7 +20,7 @@ import org.fxmisc.richtext.CodeArea;
  */
 public class Console extends Stage {
     
-    private CodeArea textZone;
+    private final CodeArea textZone;
     private final DateFormat df = new SimpleDateFormat("HH:mm:ss");
     
     public Console() {
