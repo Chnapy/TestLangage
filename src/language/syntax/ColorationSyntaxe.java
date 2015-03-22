@@ -32,11 +32,10 @@ public class ColorationSyntaxe {
     private static String FONCTIONS_PATTERN;
     private static String DIESE_PATTERN = "#.*?\\s";
     private static String DOLLAR_PATTERN = "\\$.*?\\s";
-    private final static String STRING_PATTERN = ":([^\\n\\\\]|\\\\.)*\\n";
-    private final static String COMMENT_PATTERN = "//([^\\n\\\\]|\\\\.)*\\n";
+    private final static String STRING_PATTERN = "\".*?[\\n|\"]";
+    private final static String COMMENT_PATTERN = "//.*?\\n";
 
     private static Pattern PATTERN;
-    private static Pattern PATTERN_PATERN;
 
     private static void initTabs() {
 	ROOM_PATTERN = "\\b(" + String.join("|", KeyWord.lieux) + ")\\b";
@@ -46,7 +45,6 @@ public class ColorationSyntaxe {
 	VARIABLES_PATTERN = "\\$(" + String.join("|", KeyWord.variables) + ")\\b";
 	FONCTIONS_PATTERN = "\\b(" + String.join("|", KeyWord.fonctions) + ")\\b";
 	PATTERN = Pattern.compile("(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-		+ "|(?<STRING>" + STRING_PATTERN + ")"
 		+ "|(?<ROOM>" + ROOM_PATTERN + ")"
 		+ "|(?<PERSO>" + PERSO_PATTERN + ")"
 		+ "|(?<CHOSES>" + CHOSES_PATTERN + ")"
@@ -55,6 +53,7 @@ public class ColorationSyntaxe {
 		+ "|(?<FONCTIONS>" + FONCTIONS_PATTERN + ")"
 		+ "|(?<DIESE>" + DIESE_PATTERN + ")"
 		+ "|(?<DOLLAR>" + DOLLAR_PATTERN + ")"
+		+ "|(?<STRING>" + STRING_PATTERN + ")"
 		+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
 	);
     } 
@@ -74,34 +73,34 @@ public class ColorationSyntaxe {
 	    if (matcher.group("KEYWORD") != null) {
 		styleClass = "keyword";
 	    }
-	    if (matcher.group("STRING") != null) {
-		styleClass = "string";
-	    }
-            if (matcher.group("ROOM") != null) {
+            else if (matcher.group("ROOM") != null) {
 		styleClass = "room";
 	    }
-	    if (matcher.group("PERSO") != null) {
+	    else if (matcher.group("PERSO") != null) {
 		styleClass = "perso";
 	    }
-	    if (matcher.group("CHOSES") != null) {
+	    else if (matcher.group("CHOSES") != null) {
 		styleClass = "choses";
 	    }
-	    if (matcher.group("ACTION") != null) {
+	    else if (matcher.group("ACTION") != null) {
 		styleClass = "actions";
 	    }
-	    if (matcher.group("VARIABLES") != null) {
+	    else if (matcher.group("VARIABLES") != null) {
 		styleClass = "variables";
 	    }
-	    if (matcher.group("FONCTIONS") != null) {
+	    else if (matcher.group("FONCTIONS") != null) {
 		styleClass = "fonctions";
 	    }
-	    if (matcher.group("DIESE") != null) {
+	    else if (matcher.group("DIESE") != null) {
 		styleClass = "diese";
 	    }
-	    if (matcher.group("DOLLAR") != null) {
+	    else if (matcher.group("DOLLAR") != null) {
 		styleClass = "dollar";
 	    }
-	    if (matcher.group("COMMENT") != null) {
+	    else if (matcher.group("STRING") != null) {
+		styleClass = "string";
+	    }
+	    else if (matcher.group("COMMENT") != null) {
 		styleClass = "comment";
 	    }
 	    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
