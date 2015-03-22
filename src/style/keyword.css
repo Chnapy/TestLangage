@@ -35,3 +35,11 @@
 .dollar {
     -fx-fill: #59004F;
 }
+
+.string {
+    -fx-fill: #0D75A9;
+}
+
+.comment {
+    -fx-fill: #115000;
+}

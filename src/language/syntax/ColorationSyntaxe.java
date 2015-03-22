@@ -30,10 +30,13 @@ public class ColorationSyntaxe {
     private static String ACTION_PATTERN;
     private static String VARIABLES_PATTERN;
     private static String FONCTIONS_PATTERN;
-    private static String DIESE_PATTERN;
-    private static String DOLLAR_PATTERN;
+    private static String DIESE_PATTERN = "#.*?\\s";
+    private static String DOLLAR_PATTERN = "\\$.*?\\s";
+    private final static String STRING_PATTERN = ":([^\\n\\\\]|\\\\.)*\\n";
+    private final static String COMMENT_PATTERN = "//([^\\n\\\\]|\\\\.)*\\n";
 
     private static Pattern PATTERN;
+    private static Pattern PATTERN_PATERN;
 
     private static void initTabs() {
 	ROOM_PATTERN = "\\b(" + String.join("|", KeyWord.lieux) + ")\\b";
@@ -42,9 +45,8 @@ public class ColorationSyntaxe {
 	ACTION_PATTERN = "#(" + String.join("|", KeyWord.actions) + ")\\b";
 	VARIABLES_PATTERN = "\\$(" + String.join("|", KeyWord.variables) + ")\\b";
 	FONCTIONS_PATTERN = "\\b(" + String.join("|", KeyWord.fonctions) + ")\\b";
-	DIESE_PATTERN = "#.*?\\s";
-	DOLLAR_PATTERN = "\\$.*?\\s";
 	PATTERN = Pattern.compile("(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+		+ "|(?<STRING>" + STRING_PATTERN + ")"
 		+ "|(?<ROOM>" + ROOM_PATTERN + ")"
 		+ "|(?<PERSO>" + PERSO_PATTERN + ")"
 		+ "|(?<CHOSES>" + CHOSES_PATTERN + ")"
@@ -53,9 +55,9 @@ public class ColorationSyntaxe {
 		+ "|(?<FONCTIONS>" + FONCTIONS_PATTERN + ")"
 		+ "|(?<DIESE>" + DIESE_PATTERN + ")"
 		+ "|(?<DOLLAR>" + DOLLAR_PATTERN + ")"
+		+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
 	);
-    }
-
+    } 
     public static void color(CodeArea textZone, String newValue) {
 	textZone.setStyleSpans(0, computeHighlighting(newValue));
     }
@@ -72,7 +74,10 @@ public class ColorationSyntaxe {
 	    if (matcher.group("KEYWORD") != null) {
 		styleClass = "keyword";
 	    }
-	    if (matcher.group("ROOM") != null) {
+	    if (matcher.group("STRING") != null) {
+		styleClass = "string";
+	    }
+            if (matcher.group("ROOM") != null) {
 		styleClass = "room";
 	    }
 	    if (matcher.group("PERSO") != null) {
@@ -95,6 +100,9 @@ public class ColorationSyntaxe {
 	    }
 	    if (matcher.group("DOLLAR") != null) {
 		styleClass = "dollar";
+	    }
+	    if (matcher.group("COMMENT") != null) {
+		styleClass = "comment";
 	    }
 	    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
 	    spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
