@@ -13,7 +13,7 @@ ressources {
 	
 	// Les propriétés de la fenetre (OBLIGATOIRE)
 	fenetre {
-		titre: "Titre de la fenetre"	//Si non spécifié, prend le nom de la fiction + l'auteur
+		titre: "Titre de la fenetre"	 //Si non spécifié, prend le nom de la fiction + l'auteur
 		largeur: 1200
 		longueur: 800
 	}

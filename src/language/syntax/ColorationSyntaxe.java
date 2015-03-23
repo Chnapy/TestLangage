@@ -48,7 +48,7 @@ public class ColorationSyntaxe {
 		+ "|(?<ROOM>" + ROOM_PATTERN + ")"
 		+ "|(?<PERSO>" + PERSO_PATTERN + ")"
 		+ "|(?<CHOSES>" + CHOSES_PATTERN + ")"
-		+ "|(?<ACTION>" + ACTION_PATTERN + ")"
+		+ "|(?<ACTIONS>" + ACTION_PATTERN + ")"
 		+ "|(?<VARIABLES>" + VARIABLES_PATTERN + ")"
 		+ "|(?<FONCTIONS>" + FONCTIONS_PATTERN + ")"
 		+ "|(?<DIESE>" + DIESE_PATTERN + ")"
@@ -62,38 +62,43 @@ public class ColorationSyntaxe {
 	textZone.setStyleSpans(0, computeHighlighting(newValue));
     }
 
+    private static String matchGroup(Matcher matcher, String key) {
+	if (matcher.group(key.toUpperCase()) != null) {
+	    return key.toLowerCase();
+	}
+	return null;
+    }
+
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
 	updateKeyWord(text);
 	initTabs();
 	Matcher matcher = PATTERN.matcher(text.toLowerCase());
 	int lastKwEnd = 0;
 	StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
-	String styleClass;
+	String styleClass = null;
 	while (matcher.find()) {
-	    styleClass = "";
-	    if (matcher.group("KEYWORD") != null) {
-		styleClass = "keyword";
-	    } else if (matcher.group("ROOM") != null) {
-		styleClass = "room";
-	    } else if (matcher.group("PERSO") != null) {
-		styleClass = "perso";
-	    } else if (matcher.group("CHOSES") != null) {
-		styleClass = "choses";
-	    } else if (matcher.group("ACTION") != null) {
-		styleClass = "actions";
-	    } else if (matcher.group("VARIABLES") != null) {
-		styleClass = "variables";
-	    } else if (matcher.group("FONCTIONS") != null) {
-		styleClass = "fonctions";
-	    } else if (matcher.group("DIESE") != null) {
-		styleClass = "diese";
-	    } else if (matcher.group("DOLLAR") != null) {
-		styleClass = "dollar";
-	    } else if (matcher.group("STRING") != null) {
-		styleClass = "string";
-	    } else if (matcher.group("COMMENT") != null) {
-		styleClass = "comment";
+
+	    String[] keys = {
+		"KEYWORD",
+		"ROOM",
+		"PERSO",
+		"CHOSES",
+		"ACTIONS",
+		"VARIABLES",
+		"FONCTIONS",
+		"DIESE",
+		"DOLLAR",
+		"STRING",
+		"COMMENT"
+	    };
+
+	    for (int i = 0; i < keys.length; i++) {
+		styleClass = matchGroup(matcher, keys[i]);
+		if (styleClass != null) {
+		    break;
+		}
 	    }
+
 	    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
 	    spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
 	    lastKwEnd = matcher.end();
@@ -104,7 +109,7 @@ public class ColorationSyntaxe {
 
     private static void updateKeyWord(String text) {
 	ListDonnees donnees = new PCode(text).getRessources();
-	
+
 	//Lieux
 	ListDonnees liste = ((ListDonnees) donnees.get("lieux"));
 
