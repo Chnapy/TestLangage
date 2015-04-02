@@ -19,7 +19,7 @@ import org.fxmisc.richtext.StyleSpansBuilder;
 
 /**
  *
- * @author Yann
+ * @author Yann 
  */
 public class ColorationSyntaxe {
 
