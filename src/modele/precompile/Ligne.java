@@ -16,7 +16,6 @@ public class Ligne extends ArrayList<String> {
     private Propriete[] propriete;
 
     private enum Propriete {
-
 	NULL, ATTRIBUT, LIST, TABLE, ENDLIST, ENDTABLE;
     }
 
@@ -54,6 +53,10 @@ public class Ligne extends ArrayList<String> {
 	return ret;
     }
 
+    /**
+     * TODO
+     * @return 
+     */
     public String getNom() {
 	if (!isAttribut() && !isList() && !isTable()) {
 	    return null;

@@ -30,9 +30,9 @@ public class ColorationSyntaxe {
     private static String ACTION_PATTERN;
     private static String VARIABLES_PATTERN;
     private static String FONCTIONS_PATTERN;
-    private static String DIESE_PATTERN = "#.*?\\s";
-    private static String DOLLAR_PATTERN = "\\$.*?\\s";
-    private final static String STRING_PATTERN = ":([^\\n\\\\]|\\\\.)*\\n";
+    private static final String DIESE_PATTERN = "#.*?\\s";
+    private static final String DOLLAR_PATTERN = "\\$.*?\\s";
+    private final static String STRING_PATTERN = ":.*?(\\n|//)";
     private final static String COMMENT_PATTERN = "//([^\\n\\\\]|\\\\.)*\\n";
 
     private static Pattern PATTERN;

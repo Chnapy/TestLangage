@@ -11,8 +11,7 @@
 }
 
 .butMove {
-    /*-fx-background-color: transparent;*/
-    -fx-background-color: red; /*DEBUG*/
+    -fx-background-color: transparent;
 }
 
 .butMove .label {

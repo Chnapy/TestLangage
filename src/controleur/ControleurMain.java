@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import javafx.stage.Stage;
-import modele.ModeleCompile;
 import modele.ModeleMain;
 import vue.accordeon.Fichier;
 import vue.VueMain;

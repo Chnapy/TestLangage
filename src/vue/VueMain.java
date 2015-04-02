@@ -73,7 +73,7 @@ public class VueMain {
 
 	groupe = new Group();
 	scene = new Scene(groupe);
-        scene.getStylesheets().add("style/keyword.css");
+	scene.getStylesheets().add("style/keyword.css");
 	stage.setScene(scene);
 
 	hList = new HBox();
@@ -96,12 +96,12 @@ public class VueMain {
 	groupe.getChildren().add(textZone);
 	textZone.setDisable(true);
 	textZone.setParagraphGraphicFactory(LineNumberFactory.get(textZone));
-        textZone.setStyle("-fx-font-family: Consolas;"
-                + "-fx-font-size: 15px");
+	textZone.setStyle("-fx-font-family: Consolas;"
+		+ "-fx-font-size: 15px");
 	textZone.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
 	    // Va être lancé à chaque changement dans le texte
 	    if (!oldValue.isEmpty()) {
-                ColorationSyntaxe.color(textZone,newValue);
+		ColorationSyntaxe.color(textZone, newValue);
 		fichActu.setContenu(textZone.getText());
 		fichActu.modif(true);
 		if (enregistrer.isDisabled()) {
@@ -110,7 +110,7 @@ public class VueMain {
 		}
 	    }
 	});
-        
+
 	accor = new Accordion();
 	accor.setMinHeight(General.WINDOW_HEIGHT - 19);
 	accor.setMinWidth(ACCORWIDTH);
@@ -225,7 +225,7 @@ public class VueMain {
 	    fichActu = fichier;
 	    textZone.clear();
 	    textZone.appendText(fichier.getContenu());
-            ColorationSyntaxe.color(textZone,textZone.getText());
+	    ColorationSyntaxe.color(textZone, textZone.getText());
 	    enregistrer.setDisable(!fichActu.isModif());
 	});
 	fichier.setOnClosed((event) -> {
@@ -239,7 +239,7 @@ public class VueMain {
 	fichActu = fichier;
 	textZone.clear();
 	textZone.appendText(fichier.getContenu());
-        ColorationSyntaxe.color(textZone,textZone.getText());
+	ColorationSyntaxe.color(textZone, textZone.getText());
 	textZone.setDisable(false);
     }
 

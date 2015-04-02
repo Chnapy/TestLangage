@@ -1,5 +1,4 @@
 //Déclarations des ressources (aucune obligation de toutes les déclarer)
-//Seul informations {} et fenetre {} sont obligatoires
 //Une ressource peut être déclarée pendant le déroulement de la fiction
 
 ressources {
