@@ -36,7 +36,6 @@ public class ColorationSyntaxe {
     private final static String COMMENT_PATTERN = "//([^\\n\\\\]|\\\\.)*\\n";
 
     private static Pattern PATTERN;
-    private static Pattern PATTERN_PATERN;
 
     private static void initTabs() {
 	ROOM_PATTERN = "\\b(" + String.join("|", KeyWord.lieux) + ")\\b";
@@ -46,64 +45,60 @@ public class ColorationSyntaxe {
 	VARIABLES_PATTERN = "\\$(" + String.join("|", KeyWord.variables) + ")\\b";
 	FONCTIONS_PATTERN = "\\b(" + String.join("|", KeyWord.fonctions) + ")\\b";
 	PATTERN = Pattern.compile("(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-		+ "|(?<STRING>" + STRING_PATTERN + ")"
 		+ "|(?<ROOM>" + ROOM_PATTERN + ")"
 		+ "|(?<PERSO>" + PERSO_PATTERN + ")"
 		+ "|(?<CHOSES>" + CHOSES_PATTERN + ")"
-		+ "|(?<ACTION>" + ACTION_PATTERN + ")"
+		+ "|(?<ACTIONS>" + ACTION_PATTERN + ")"
 		+ "|(?<VARIABLES>" + VARIABLES_PATTERN + ")"
 		+ "|(?<FONCTIONS>" + FONCTIONS_PATTERN + ")"
 		+ "|(?<DIESE>" + DIESE_PATTERN + ")"
 		+ "|(?<DOLLAR>" + DOLLAR_PATTERN + ")"
+		+ "|(?<STRING>" + STRING_PATTERN + ")"
 		+ "|(?<COMMENT>" + COMMENT_PATTERN + ")"
 	);
-    } 
+    }
+
     public static void color(CodeArea textZone, String newValue) {
 	textZone.setStyleSpans(0, computeHighlighting(newValue));
+    }
+
+    private static String matchGroup(Matcher matcher, String key) {
+	if (matcher.group(key.toUpperCase()) != null) {
+	    return key.toLowerCase();
+	}
+	return null;
     }
 
     private static StyleSpans<Collection<String>> computeHighlighting(String text) {
 	updateKeyWord(text);
 	initTabs();
-	Matcher matcher = PATTERN.matcher(text);
+	Matcher matcher = PATTERN.matcher(text.toLowerCase());
 	int lastKwEnd = 0;
 	StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
-	String styleClass;
+	String styleClass = null;
 	while (matcher.find()) {
-	    styleClass = "";
-	    if (matcher.group("KEYWORD") != null) {
-		styleClass = "keyword";
+
+	    String[] keys = {
+		"KEYWORD",
+		"ROOM",
+		"PERSO",
+		"CHOSES",
+		"ACTIONS",
+		"VARIABLES",
+		"FONCTIONS",
+		"DIESE",
+		"DOLLAR",
+		"STRING",
+		"COMMENT"
+	    };
+
+	    for (int i = 0; i < keys.length; i++) {
+		styleClass = matchGroup(matcher, keys[i]);
+		if (styleClass != null) {
+		    break;
+		}
 	    }
-	    if (matcher.group("STRING") != null) {
-		styleClass = "string";
-	    }
-            if (matcher.group("ROOM") != null) {
-		styleClass = "room";
-	    }
-	    if (matcher.group("PERSO") != null) {
-		styleClass = "perso";
-	    }
-	    if (matcher.group("CHOSES") != null) {
-		styleClass = "choses";
-	    }
-	    if (matcher.group("ACTION") != null) {
-		styleClass = "actions";
-	    }
-	    if (matcher.group("VARIABLES") != null) {
-		styleClass = "variables";
-	    }
-	    if (matcher.group("FONCTIONS") != null) {
-		styleClass = "fonctions";
-	    }
-	    if (matcher.group("DIESE") != null) {
-		styleClass = "diese";
-	    }
-	    if (matcher.group("DOLLAR") != null) {
-		styleClass = "dollar";
-	    }
-	    if (matcher.group("COMMENT") != null) {
-		styleClass = "comment";
-	    }
+
 	    spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
 	    spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
 	    lastKwEnd = matcher.end();
@@ -113,33 +108,34 @@ public class ColorationSyntaxe {
     }
 
     private static void updateKeyWord(String text) {
-	//Lieux
 	ListDonnees donnees = new PCode(text).getRessources();
+
+	//Lieux
 	ListDonnees liste = ((ListDonnees) donnees.get("lieux"));
 
 	liste.values().stream().forEach((lieu) -> {
-	    KeyWord.lieux = append(KeyWord.lieux, lieu.getNom());
+	    KeyWord.lieux = append(KeyWord.lieux, lieu.getNom().toLowerCase());
 	});
 
 	//Personnages
 	liste = ((ListDonnees) donnees.get("personnages"));
 
 	liste.values().stream().forEach((perso) -> {
-	    KeyWord.perso = append(KeyWord.perso, perso.getNom());
+	    KeyWord.perso = append(KeyWord.perso, perso.getNom().toLowerCase());
 	});
 
 	//Choses
 	liste = ((ListDonnees) donnees.get("choses"));
 
 	liste.values().stream().forEach((chose) -> {
-	    KeyWord.choses = append(KeyWord.choses, chose.getNom());
+	    KeyWord.choses = append(KeyWord.choses, chose.getNom().toLowerCase());
 	});
 
 	//Actions
 	liste = ((ListDonnees) donnees.get("actions"));
 
 	liste.values().stream().forEach((action) -> {
-	    KeyWord.actions = append(KeyWord.actions, action.getNom());
+	    KeyWord.actions = append(KeyWord.actions, action.getNom().toLowerCase());
 	});
 
 	//Variables
@@ -147,7 +143,7 @@ public class ColorationSyntaxe {
 
 	liste.values().stream().forEach((Donnee variable) -> {
 	    for (Donnee var : ((ListDonnees) variable).values()) {
-		KeyWord.variables = append(KeyWord.variables, var.getNom());
+		KeyWord.variables = append(KeyWord.variables, var.getNom().toLowerCase());
 	    }
 	});
 
@@ -155,7 +151,7 @@ public class ColorationSyntaxe {
 	liste = ((ListDonnees) donnees.get("fonctions"));
 
 	liste.values().stream().forEach((fonction) -> {
-	    KeyWord.fonctions = append(KeyWord.fonctions, fonction.getNom());
+	    KeyWord.fonctions = append(KeyWord.fonctions, fonction.getNom().toLowerCase());
 	});
 
     }

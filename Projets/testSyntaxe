@@ -5,14 +5,14 @@ ressources {
 
 	// Les informations générales de la fiction (OBLIGATOIRE)
 	informations {
-		nom: NomDeLaFiction
-		type: Aventure
-		auteur: Toto
+		nom: "NomDeLaFiction"
+		type: "Aventure"
+		auteur: "Toto"
 	}
 	
 	// Les propriétés de la fenetre (OBLIGATOIRE)
 	fenetre {
-		titre: Titre de la fenetre	//Si non spécifié, prend le nom de la fiction + l'auteur
+		titre: "Titre de la fenetre"	 //Si non spécifié, prend le nom de la fiction + l'auteur
 		largeur: 1200
 		longueur: 800
 	}
@@ -23,21 +23,21 @@ ressources {
 			devant: Chambre
 			entrée {	//Actions au moment d'entrer dans la room
 				avant [	//Avant d'entrer, lance les actions...
-					action1
-					action2
+					#action1
+					#action2
 				]
 			}
 			sortie {	//Actions au moment de sortir de la room
 				après [	//après sortir, lance les actions...
-					action1
-					action2
+					#action1
+					#action2
 				]
 			}
 		}
 		Chambre {
 			derriere: Hall		//Derriere la Chambre se trouve le Hall
 		}
-		TestLieu1 {
+		Cuisine {
 			gauche: Chambre
 		}
 
@@ -47,8 +47,8 @@ ressources {
 	personnages {
 		Bob {
 			age: 31
-			sexe: m
-			personnalité: aggressif
+			sexe: "m"
+			personnalité: "aggressif"
 			lieu: Hall
 			joueur: oui		//Représente le joueur
 			attributs [
@@ -59,10 +59,10 @@ ressources {
 
 		Eva {
 			age: 42
-			sexe: f
+			sexe: "f"
 			personnalité [
-				aggressive
-				folle
+				"aggressive"
+				"folle"
 			]
 			inventaire: 12	//Possède un inventaire avec 12 emplacement
 			lieu: Chambre
@@ -75,7 +75,7 @@ ressources {
 	// Les objets
 	choses {
 		frigo {
-			poids: lourd
+			poids: "lourd"
 			ouvrable: oui
 			verrouillable: oui
 			conteneur: 15
@@ -83,7 +83,7 @@ ressources {
 			attributs [
 				plein | vide	//Peut posséder l'un OU l'autre
 			]
-			lieu: TestLieu1
+			lieu: Cuisine
 		}
 
 		test1 {
@@ -105,7 +105,7 @@ ressources {
 	actions {
 		xPrendre [	//L'action xPrendre examine puis prend
 			#examiner
-			Affichage de texte
+			"Affichage de texte"
 			#prendre
 		]
 	}
@@ -130,7 +130,7 @@ ressources {
 	fonctions {
 		fonction1 [	// Cette fonction lance ces actions
 			#action1
-			Affichage de texte
+			"Affichage de texte"
 			#action2
 		]
 	
@@ -146,10 +146,10 @@ Eva est dans le Hall.
 Le jeu commence maintenant.	//Début de la fiction, maintenant peut être remplacé par un nombre de secondes: Le jeu commence dans 5 secondes.
 
 Un dialogue nommé Dialogue1 commence avec Bob,Eva {
-	Bob: Coucou !
-	Eva: Hello !
-	Bob: Comment ca va ?
-	Eva: Bien et toi?
+	Bob: "Coucou !"
+	Eva: "Hello !"
+	Bob: "Comment ca va ?"
+	Eva: "Bien et toi?"
 	Bob: Choix1 [			// Permet un choix au joueur, le choix est ici nommé Choix1.
 		Bien: #xPrendre		// Si le joueur choisi Bien, l'action action1 sera lancée
 		Mal [				// Si le joueur choisi Mal, l'action action1 et l'action2 seront lancées
@@ -158,7 +158,7 @@ Un dialogue nommé Dialogue1 commence avec Bob,Eva {
 			#xPrendre
 		]
 	]
-	Eva: Exemple $varTest3	//Variable
+	Eva: "Exemple"+ $varTest3+"autre text"	//Variable
 }
 
 // Choix1 est en fait une variable dans laquelle est stockée le choix de l'utilisateur
